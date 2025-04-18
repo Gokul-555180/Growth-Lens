@@ -1,0 +1,447 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Growth Tracker | Growth Lens</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+        }
+        .sidebar {
+            transition: all 0.3s;
+        }
+        .milestone-card {
+            transition: all 0.3s;
+        }
+        .milestone-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+        }
+        .timeline-item:not(:last-child):after {
+            content: '';
+            position: absolute;
+            left: 1.25rem;
+            top: 2.5rem;
+            height: calc(100% - 2.5rem);
+            width: 2px;
+            background-color: #e5e7eb;
+        }
+    </style>
+</head>
+<body class="bg-gray-100">
+    <!-- Sidebar/Navigation -->
+    <div class="flex h-screen">
+        <div class="sidebar bg-white w-64 px-4 py-6 shadow-lg">
+            <div class="flex items-center space-x-2 px-4 mb-8">
+                <span class="font-semibold text-xl text-gray-800">Growth Lens</span>
+            </div>
+            <nav>
+                <div class="space-y-2">
+                    <a href="dashboard.html" class="flex items-center space-x-3 px-4 py-3 text-gray-600 hover:bg-gray-100 rounded-lg">
+                        <i class="fas fa-tachometer-alt"></i>
+                        <span>Dashboard</span>
+                    </a>
+                    <a href="market-analysis.html" class="flex items-center space-x-3 px-4 py-3 text-gray-600 hover:bg-gray-100 rounded-lg">
+                        <i class="fas fa-chart-bar"></i>
+                        <span>Market Analysis</span>
+                    </a>
+                    <a href="growth-tracker.html" class="flex items-center space-x-3 px-4 py-3 text-blue-600 bg-blue-50 rounded-lg">
+                        <i class="fas fa-bullseye"></i>
+                        <span>Growth Tracker</span>
+                    </a>
+                    <a href="resources.html" class="flex items-center space-x-3 px-4 py-3 text-gray-600 hover:bg-gray-100 rounded-lg">
+                        <i class="fas fa-book"></i>
+                        <span>Resources</span>
+                    </a>
+                </div>
+                <div class="mt-8 pt-6 border-t border-gray-200">
+                    <a href="#" class="flex items-center space-x-3 px-4 py-3 text-gray-600 hover:bg-gray-100 rounded-lg">
+                        <i class="fas fa-cog"></i>
+                        <span>Settings</span>
+                    </a>
+                    <a href="index.html" class="flex items-center space-x-3 px-4 py-3 text-gray-600 hover:bg-gray-100 rounded-lg">
+                        <i class="fas fa-sign-out-alt"></i>
+                        <span>Logout</span>
+                    </a>
+                </div>
+            </nav>
+        </div>
+
+        <!-- Main Content -->
+        <div class="flex-1 overflow-y-auto">
+            <!-- Top Navigation -->
+            <header class="bg-white shadow-sm">
+                <div class="flex justify-between items-center px-6 py-4">
+                    <h1 class="text-2xl font-semibold text-gray-800">Growth Tracker</h1>
+                    <div class="flex items-center space-x-4">
+                        <button class="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition flex items-center">
+                            <i class="fas fa-plus mr-2"></i> New Goal
+                        </button>
+                        <div class="relative">
+                            <select class="appearance-none bg-white border border-gray-300 rounded-lg pl-4 pr-8 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500">
+                                <option>This Year</option>
+                                <option>Last Year</option>
+                                <option>All Time</option>
+                            </select>
+                            <i class="fas fa-chevron-down absolute right-3 top-3 text-gray-400 pointer-events-none"></i>
+                        </div>
+                    </div>
+                </div>
+            </header>
+
+            <!-- Growth Tracker Content -->
+            <main class="p-6">
+                <!-- Progress Overview -->
+                <div class="bg-white p-6 rounded-xl shadow-sm mb-6">
+                    <h2 class="text-xl font-semibold mb-6">Progress Overview</h2>
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-6">
+                        <div class="border border-gray-200 rounded-lg p-4">
+                            <p class="text-gray-500 text-sm">Goals Completed</p>
+                            <div class="flex items-end justify-between mt-2">
+                                <h3 class="text-3xl font-bold">8/12</h3>
+                                <div class="w-16 h-16">
+                                    <canvas id="goalsChart"></canvas>
+                                </div>
+                            </div>
+                            <p class="text-green-500 text-sm mt-2"><i class="fas fa-arrow-up mr-1"></i> 2 more than last quarter</p>
+                        </div>
+                        <div class="border border-gray-200 rounded-lg p-4">
+                            <p class="text-gray-500 text-sm">Current Streak</p>
+                            <div class="flex items-end justify-between mt-2">
+                                <h3 class="text-3xl font-bold">24 days</h3>
+                                <div class="text-yellow-500 text-3xl">
+                                    <i class="fas fa-fire"></i>
+                                </div>
+                            </div>
+                            <p class="text-green-500 text-sm mt-2"><i class="fas fa-arrow-up mr-1"></i> Personal best!</p>
+                        </div>
+                        <div class="border border-gray-200 rounded-lg p-4">
+                            <p class="text-gray-500 text-sm">Avg. Goal Completion</p>
+                            <div class="flex items-end justify-between mt-2">
+                                <h3 class="text-3xl font-bold">78%</h3>
+                                <div class="w-16 h-16">
+                                    <canvas id="completionRateChart"></canvas>
+                                </div>
+                            </div>
+                            <p class="text-red-500 text-sm mt-2"><i class="fas fa-arrow-down mr-1"></i> 5% from last quarter</p>
+                        </div>
+                    </div>
+                    <div class="h-80">
+                        <canvas id="progressTrendChart"></canvas>
+                    </div>
+                </div>
+
+                <!-- Key Milestones -->
+                <div class="bg-white p-6 rounded-xl shadow-sm mb-6">
+                    <div class="flex justify-between items-center mb-6">
+                        <h2 class="text-xl font-semibold">Key Milestones</h2>
+                        <button class="text-blue-600 hover:text-blue-800 flex items-center">
+                            <i class="fas fa-filter mr-2"></i> Filter
+                        </button>
+                    </div>
+                    <div class="space-y-6">
+                        <!-- Timeline Item -->
+                        <div class="relative timeline-item pl-12">
+                            <div class="absolute left-0 top-0 flex items-center justify-center w-10 h-10 rounded-full bg-blue-100 text-blue-600">
+                                <i class="fas fa-check"></i>
+                            </div>
+                            <div class="milestone-card bg-white border border-gray-200 rounded-xl p-5">
+                                <div class="flex justify-between items-start mb-2">
+                                    <h3 class="font-semibold text-lg">Reached $20K Monthly Revenue</h3>
+                                    <span class="bg-green-100 text-green-800 text-xs px-2 py-1 rounded-full">Completed</span>
+                                </div>
+                                <p class="text-gray-600 mb-4">Achieved target revenue for the first time in business history</p>
+                                <div class="flex justify-between items-center">
+                                    <div class="flex items-center text-sm text-gray-500">
+                                        <i class="far fa-calendar-alt mr-2"></i>
+                                        <span>Jun 15, 2023</span>
+                                    </div>
+                                    <button class="text-blue-600 hover:text-blue-800 text-sm font-medium">
+                                        View Details
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Timeline Item -->
+                        <div class="relative timeline-item pl-12">
+                            <div class="absolute left-0 top-0 flex items-center justify-center w-10 h-10 rounded-full bg-blue-100 text-blue-600">
+                                <i class="fas fa-check"></i>
+                            </div>
+                            <div class="milestone-card bg-white border border-gray-200 rounded-xl p-5">
+                                <div class="flex justify-between items-start mb-2">
+                                    <h3 class="font-semibold text-lg">1000th Customer</h3>
+                                    <span class="bg-green-100 text-green-800 text-xs px-2 py-1 rounded-full">Completed</span>
+                                </div>
+                                <p class="text-gray-600 mb-4">Reached four-digit customer count with 45% returning customers</p>
+                                <div class="flex justify-between items-center">
+                                    <div class="flex items-center text-sm text-gray-500">
+                                        <i class="far fa-calendar-alt mr-2"></i>
+                                        <span>May 2, 2023</span>
+                                    </div>
+                                    <button class="text-blue-600 hover:text-blue-800 text-sm font-medium">
+                                        View Details
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Timeline Item -->
+                        <div class="relative timeline-item pl-12">
+                            <div class="absolute left-0 top-0 flex items-center justify-center w-10 h-10 rounded-full bg-yellow-100 text-yellow-600">
+                                <i class="fas fa-spinner"></i>
+                            </div>
+                            <div class="milestone-card bg-white border border-gray-200 rounded-xl p-5">
+                                <div class="flex justify-between items-start mb-2">
+                                    <h3 class="font-semibold text-lg">Expand to New Region</h3>
+                                    <span class="bg-yellow-100 text-yellow-800 text-xs px-2 py-1 rounded-full">In Progress</span>
+                                </div>
+                                <p class="text-gray-600 mb-4">Currently at 65% completion for establishing operations in neighboring city</p>
+                                <div class="flex justify-between items-center">
+                                    <div class="flex items-center text-sm text-gray-500">
+                                        <i class="far fa-calendar-alt mr-2"></i>
+                                        <span>Target: Aug 30, 2023</span>
+                                    </div>
+                                    <div class="flex items-center space-x-3">
+                                        <div class="w-32 bg-gray-200 rounded-full h-2">
+                                            <div class="bg-blue-600 h-2 rounded-full" style="width: 65%"></div>
+                                        </div>
+                                        <span class="text-sm text-gray-600">65%</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Timeline Item -->
+                        <div class="relative timeline-item pl-12">
+                            <div class="absolute left-0 top-0 flex items-center justify-center w-10 h-10 rounded-full bg-gray-100 text-gray-600">
+                                <i class="far fa-clock"></i>
+                            </div>
+                            <div class="milestone-card bg-white border border-gray-200 rounded-xl p-5">
+                                <div class="flex justify-between items-start mb-2">
+                                    <h3 class="font-semibold text-lg">Launch New Product Line</h3>
+                                    <span class="bg-gray-100 text-gray-800 text-xs px-2 py-1 rounded-full">Upcoming</span>
+                                </div>
+                                <p class="text-gray-600 mb-4">Research phase complete, preparing for prototype development</p>
+                                <div class="flex justify-between items-center">
+                                    <div class="flex items-center text-sm text-gray-500">
+                                        <i class="far fa-calendar-alt mr-2"></i>
+                                        <span>Target: Q4 2023</span>
+                                    </div>
+                                    <button class="text-blue-600 hover:text-blue-800 text-sm font-medium">
+                                        Start Now
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Current Goals -->
+                <div class="bg-white p-6 rounded-xl shadow-sm">
+                    <h2 class="text-xl font-semibold mb-6">Current Goals</h2>
+                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                        <!-- Goal Card -->
+                        <div class="border border-gray-200 rounded-xl p-5 hover:shadow-md transition">
+                            <div class="flex justify-between items-start mb-3">
+                                <h3 class="font-semibold">Increase Customer Retention</h3>
+                                <span class="bg-blue-100 text-blue-800 text-xs px-2 py-1 rounded-full">Active</span>
+                            </div>
+                            <p class="text-gray-600 text-sm mb-4">Goal: Increase from 45% to 60% returning customers</p>
+                            <div class="mb-4">
+                                <div class="flex justify-between text-sm text-gray-500 mb-1">
+                                    <span>Progress</span>
+                                    <span>52%</span>
+                                </div>
+                                <div class="w-full bg-gray-200 rounded-full h-2">
+                                    <div class="bg-blue-600 h-2 rounded-full" style="width: 52%"></div>
+                                </div>
+                            </div>
+                            <div class="flex justify-between items-center text-sm">
+                                <div class="text-gray-500">
+                                    <i class="far fa-calendar-alt mr-1"></i>
+                                    <span>Due: Sep 15</span>
+                                </div>
+                                <button class="text-blue-600 hover:text-blue-800 font-medium">
+                                    Update
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Goal Card -->
+                        <div class="border border-gray-200 rounded-xl p-5 hover:shadow-md transition">
+                            <div class="flex justify-between items-start mb-3">
+                                <h3 class="font-semibold">Reduce Customer Acquisition Cost</h3>
+                                <span class="bg-blue-100 text-blue-800 text-xs px-2 py-1 rounded-full">Active</span>
+                            </div>
+                            <p class="text-gray-600 text-sm mb-4">Goal: Decrease from $85 to $60 per customer</p>
+                            <div class="mb-4">
+                                <div class="flex justify-between text-sm text-gray-500 mb-1">
+                                    <span>Progress</span>
+                                    <span>72%</span>
+                                </div>
+                                <div class="w-full bg-gray-200 rounded-full h-2">
+                                    <div class="bg-green-500 h-2 rounded-full" style="width: 72%"></div>
+                                </div>
+                            </div>
+                            <div class="flex justify-between items-center text-sm">
+                                <div class="text-gray-500">
+                                    <i class="far fa-calendar-alt mr-1"></i>
+                                    <span>Due: Oct 1</span>
+                                </div>
+                                <button class="text-blue-600 hover:text-blue-800 font-medium">
+                                    Update
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Goal Card -->
+                        <div class="border border-gray-200 rounded-xl p-5 hover:shadow-md transition">
+                            <div class="flex justify-between items-start mb-3">
+                                <h3 class="font-semibold">Improve Online Reviews</h3>
+                                <span class="bg-blue-100 text-blue-800 text-xs px-2 py-1 rounded-full">Active</span>
+                            </div>
+                            <p class="text-gray-600 text-sm mb-4">Goal: Increase average rating from 4.3 to 4.7 stars</p>
+                            <div class="mb-4">
+                                <div class="flex justify-between text-sm text-gray-500 mb-1">
+                                    <span>Progress</span>
+                                    <span>35%</span>
+                                </div>
+                                <div class="w-full bg-gray-200 rounded-full h-2">
+                                    <div class="bg-yellow-500 h-2 rounded-full" style="width: 35%"></div>
+                                </div>
+                            </div>
+                            <div class="flex justify-between items-center text-sm">
+                                <div class="text-gray-500">
+                                    <i class="far fa-calendar-alt mr-1"></i>
+                                    <span>Due: Nov 15</span>
+                                </div>
+                                <button class="text-blue-600 hover:text-blue-800 font-medium">
+                                    Update
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </main>
+        </div>
+    </div>
+
+    <script>
+        // Goals Chart
+        const goalsCtx = document.getElementById('goalsChart').getContext('2d');
+        const goalsChart = new Chart(goalsCtx, {
+            type: 'doughnut',
+            data: {
+                labels: ['Completed', 'Remaining'],
+                datasets: [{
+                    data: [8, 4],
+                    backgroundColor: [
+                        'rgba(16, 185, 129, 0.8)',
+                        'rgba(209, 213, 219, 0.8)'
+                    ],
+                    borderWidth: 0
+                }]
+            },
+            options: {
+                responsive: true,
+                cutout: '70%',
+                plugins: {
+                    legend: {
+                        display: false
+                    }
+                }
+            }
+        });
+
+        // Completion Rate Chart
+        const completionRateCtx = document.getElementById('completionRateChart').getContext('2d');
+        const completionRateChart = new Chart(completionRateCtx, {
+            type: 'doughnut',
+            data: {
+                labels: ['Completed', 'Incomplete'],
+                datasets: [{
+                    data: [78, 22],
+                    backgroundColor: [
+                        'rgba(59, 130, 246, 0.8)',
+                        'rgba(209, 213, 219, 0.8)'
+                    ],
+                    borderWidth: 0
+                }]
+            },
+            options: {
+                responsive: true,
+                cutout: '70%',
+                plugins: {
+                    legend: {
+                        display: false
+                    }
+                }
+            }
+        });
+
+        // Progress Trend Chart
+        const progressTrendCtx = document.getElementById('progressTrendChart').getContext('2d');
+        const progressTrendChart = new Chart(progressTrendCtx, {
+            type: 'line',
+            data: {
+                labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul'],
+                datasets: [
+                    {
+                        label: 'Goal Completion Rate',
+                        data: [65, 68, 72, 70, 75, 78, 82],
+                        borderColor: 'rgba(59, 130, 246, 1)',
+                        backgroundColor: 'rgba(59, 130, 246, 0.1)',
+                        borderWidth: 2,
+                        tension: 0.3,
+                        fill: true
+                    },
+                    {
+                        label: 'Industry Average',
+                        data: [60, 62, 65, 63, 66, 68, 70],
+                        borderColor: 'rgba(16, 185, 129, 1)',
+                        backgroundColor: 'rgba(16, 185, 129, 0.1)',
+                        borderWidth: 2,
+                        tension: 0.3,
+                        fill: true,
+                        borderDash: [5, 5]
+                    }
+                ]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: {
+                        position: 'top',
+                    },
+                    tooltip: {
+                        callbacks: {
+                            label: function(context) {
+                                return context.dataset.label + ': ' + context.raw + '%';
+                            }
+                        }
+                    }
+                },
+                scales: {
+                    y: {
+                        beginAtZero: false,
+                        min: 50,
+                        max: 100,
+                        ticks: {
+                            callback: function(value) {
+                                return value + '%';
+                            }
+                        }
+                    }
+                }
+            }
+        });
+    </script>
+</body>
+</html>

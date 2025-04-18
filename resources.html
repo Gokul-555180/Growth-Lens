@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Resources | Growth Lens</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+        }
+        .sidebar {
+            transition: all 0.3s;
+        }
+        .resource-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1);
+        }
+        .video-container {
+            position: relative;
+            padding-bottom: 56.25%;
+            height: 0;
+            overflow: hidden;
+        }
+        .video-container iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+    </style>
+</head>
+<body class="bg-gray-100">
+    <!-- Sidebar/Navigation -->
+    <div class="flex h-screen">
+        <div class="sidebar bg-white w-64 px-4 py-6 shadow-lg">
+            <div class="flex items-center space-x-2 px-4 mb-8">
+                <span class="font-semibold text-xl text-gray-800">Growth Lens</span>
+            </div>
+            <nav>
+                <div class="space-y-2">
+                    <a href="dashboard.html" class="flex items-center space-x-3 px-4 py-3 text-gray-600 hover:bg-gray-100 rounded-lg">
+                        <i class="fas fa-tachometer-alt"></i>
+                        <span>Dashboard</span>
+                    </a>
+                    <a href="market-analysis.html" class="flex items-center space-x-3 px-4 py-3 text-gray-600 hover:bg-gray-100 rounded-lg">
+                        <i class="fas fa-chart-bar"></i>
+                        <span>Market Analysis</span>
+                    </a>
+                    <a href="growth-tracker.html" class="flex items-center space-x-3 px-4 py-3 text-gray-600 hover:bg-gray-100 rounded-lg">
+                        <i class="fas fa-bullseye"></i>
+                        <span>Growth Tracker</span>
+                    </a>
+                    <a href="resources.html" class="flex items-center space-x-3 px-4 py-3 text-blue-600 bg-blue-50 rounded-lg">
+                        <i class="fas fa-book"></i>
+                        <span>Resources</span>
+                    </a>
+                </div>
+                <div class="mt-8 pt-6 border-t border-gray-200">
+                    <a href="#" class="flex items-center space-x-3 px-4 py-3 text-gray-600 hover:bg-gray-100 rounded-lg">
+                        <i class="fas fa-cog"></i>
+                        <span>Settings</span>
+                    </a>
+                    <a href="index.html" class="flex items-center space-x-3 px-4 py-3 text-gray-600 hover:bg-gray-100 rounded-lg">
+                        <i class="fas fa-sign-out-alt"></i>
+                        <span>Logout</span>
+                    </a>
+                </div>
+            </nav>
+        </div>
+
+        <!-- Main Content -->
+        <div class="flex-1 overflow-y-auto">
+            <!-- Top Navigation -->
+            <header class="bg-white shadow-sm">
+                <div class="flex justify-between items-center px-6 py-4">
+                    <h1 class="text-2xl font-semibold text-gray-800">Business Resources</h1>
+                    <div class="relative w-64">
+                        <input type="text" placeholder="Search resources..." class="pl-10 pr-4 py-2 w-full border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent">
+                        <i class="fas fa-search absolute left-3 top-3 text-gray-400"></i>
+                    </div>
+                </div>
+            </header>
+
+            <!-- Resources Content -->
+            <main class="p-6">
+                <!-- Featured Resources -->
+                <div class="mb-8">
+                    <h2 class="text-xl font-semibold mb-4">Featured Resources</h2>
+                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                        <!-- Featured Resource 1 -->
+                        <div class="resource-card bg-white rounded-xl shadow-sm overflow-hidden transition duration-300">
+                            <div class="h-48 bg-blue-600 flex items-center justify-center text-white text-4xl">
+                                <i class="fas fa-chart-line"></i>
+                            </div>
+                            <div class="p-6">
+                                <div class="flex items-center text-sm text-gray-500 mb-2">
+                                    <span class="bg-blue-100 text-blue-800 text-xs px-2 py-1 rounded mr-2">Guide</span>
+                                    <span>15 min read</span>
+                                </div>
+                                <h3 class="font-semibold text-lg mb-2">The Complete Guide to Market Positioning</h3>
+                                <p class="text-gray-600 text-sm mb-4">Learn how to establish your business in a competitive market and stand out from competitors.</p>
+                                <a href="#" class="text-blue-600 font-medium text-sm hover:text-blue-800 flex items-center">
+                                    Read Guide <i class="fas fa-arrow-right ml-2"></i>
+                                </a>
+                            </div>
+                        </div>
+
+                        <!-- Featured Resource 2 -->
+                        <div class="resource-card bg-white rounded-xl shadow-sm overflow-hidden transition duration-300">
+                            <div class="video-container">
+                                <iframe src="https://www.youtube.com/embed/7Pq-S557XQU" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                            </div>
+                            <div class="p-6">
+                                <div class="flex items-center text-sm text-gray-500 mb-2">
+                                    <span class="bg-red-100 text-red-800 text-xs px-2 py-1 rounded mr-2">Video</span>
+                                    <span>12 min</span>
+                                </div>
+                                <h3 class="font-semibold text-lg mb-2">5 Growth Hacks for Small Businesses</h3>
+                                <p class="text-gray-600 text-sm mb-4">Actionable strategies to accelerate your business growth without a big budget.</p>
+                                <a href="#" class="text-blue-600 font-medium text-sm hover:text-blue-800 flex items-center">
+                                    Watch More <i class="fas fa-arrow-right ml-2"></i>
+                                </a>
+                            </div>
+                        </div>
+
+                        <!-- Featured Resource 3 -->
+                        <div class="resource-card bg-white rounded-xl shadow-sm overflow-hidden transition duration-300">
+                            <div class="h-48 bg-green-600 flex items-center justify-center text-white text-4xl">
+                                <i class="fas fa-calculator"></i>
+                            </div>
+                            <div class="p-6">
+                                <div class="flex items-center text-sm text-gray-500 mb-2">
+                                    <span class="bg-purple-100 text-purple-800 text-xs px-2 py-1 rounded mr-2">Tool</span>
+                                    <span>Interactive</span>
+                                </div>
+                                <h3 class="font-semibold text-lg mb-2">Market Share Calculator</h3>
+                                <p class="text-gray-600 text-sm mb-4">Estimate your current market share and project future growth based on industry trends.</p>
+                                <a href="#" class="text-blue-600 font-medium text-sm hover:text-blue-800 flex items-center">
+                                    Use Tool <i class="fas fa-arrow-right ml-2"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Resource Categories -->
+                <div class="mb-8">
+                    <h2 class="text-xl font-semibold mb-4">Browse by Category</h2>
+                    <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4">
+                        <a href="#" class="bg-white p-4 rounded-lg shadow-sm text-center hover:bg-blue-50 hover:text-blue-600 transition">
+                            <div class="text-blue-500 text-2xl mb-2">
+                                <i class="fas fa-bullseye"></i>
+                            </div>
+                            <span class="font-medium">Strategy</span>
+                        </a>
+                        <a href="#" class="bg-white p-4 rounded-lg shadow-sm text-center hover:bg-green-50 hover:text-green-600 transition">
+                            <div class="text-green-500 text-2xl mb-2">
+                                <i class="fas fa-chart-line"></i>
+                            </div>
+                            <span class="font-medium">Analytics</span>
+                        </a>
+                        <a href="#" class="bg-white p-4 rounded-lg shadow-sm text-center hover:bg-yellow-50 hover:text-yellow-600 transition">
+                            <div class="text-yellow-500 text-2xl mb-2">
+                                <i class="fas fa-ad"></i>
+                            </div>
+                            <span class="font-medium">Marketing</span>
+                        </a>
+                        <a href="#" class="bg-white p-4 rounded-lg shadow-sm text-center hover:bg-purple-50 hover:text-purple-600 transition">
+                            <div class="text-purple-500 text-2xl mb-2">
+                                <i class="fas fa-users"></i>
+                            </div>
+                            <span class="font-medium">Customers</span>
+                        </a>
+                        <a href="#" class="bg-white p-4 rounded-lg shadow-sm text-center hover:bg-red-50 hover:text-red-600 transition">
+                            <div class="text-red-500 text-2xl mb-2">
+                                <i class="fas fa-lightbulb"></i>
+                            </div>
+                            <span class="font-medium">Innovation</span>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Popular Articles -->
+                <div class="mb-8">
+                    <div class="flex justify-between items-center mb-4">
+                        <h2 class="text-xl font-semibold">Popular Articles</h2>
+                        <a href="#" class="text-blue-600 hover:text-blue-800 text-sm font-medium">View All</a>
+                    </div>
+                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                        <!-- Article 1 -->
+                        <div class="resource-card bg-white rounded-xl shadow-sm p-6 transition duration-300">
+                            <div class="flex items-center text-sm text-gray-500 mb-2">
+                                <span class="bg-blue-100 text-blue-800 text-xs px-2 py-1 rounded mr-2">Article</span>
+                                <span>8 min read</span>
+                            </div>
+                            <h3 class="font-semibold text-lg mb-2">How to Identify Your Ideal Customer Profile</h3>
+                            <p class="text-gray-600 text-sm mb-4">Learn how to define and target your most valuable customers to maximize marketing ROI.</p>
+                            <div class="flex items-center justify-between">
+                                <div class="flex items-center">
+                                    <img src="https://randomuser.me/api/portraits/women/43.jpg" alt="Author" class="w-6 h-6 rounded-full mr-2">
+                                    <span class="text-xs text-gray-500">Sarah Johnson</span>
+                                </div>
+                                <span class="text-xs text-gray-500">Jun 12, 2023</span>
+                            </div>
+                        </div>
+
+                        <!-- Article 2 -->
+                        <div class="resource-card bg-white rounded-xl shadow-sm p-6 transition duration-300">
+                            <div class="flex items-center text-sm text-gray-500 mb-2">
+                                <span class="bg-green-100 text-green-800 text-xs px-2 py-1 rounded mr-2">Article</span>
+                                <span>10 min read</span>
+                            </div>
+                            <h3 class="font-semibold text-lg mb-2">Competitive Analysis: A Step-by-Step Guide</h3>
+                            <p class="text-gray-600 text-sm mb-4">Discover how to systematically analyze competitors and uncover opportunities in your market.</p>
+                            <div class="flex items-center justify-between">
+                                <div class="flex items-center">
+                                    <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="Author" class="w-6 h-6 rounded-full mr-2">
+                                    <span class="text-xs text-gray-500">Michael Chen</span>
+                                </div>
+                                <span class="text-xs text-gray-500">May 28, 2023</span>
+                            </div>
+                        </div>
+
+                        <!-- Article 3 -->
+                        <div class="resource-card bg-white rounded-xl shadow-sm p-6 transition duration-300">
+                            <div class="flex items-center text-sm text-gray-500 mb-2">
+                                <span class="bg-purple-100 text-purple-800 text-xs px-2 py-1 rounded mr-2">Article</span>
+                                <span>6 min read</span>
+                            </div>
+                            <h3 class="font-semibold text-lg mb-2">Pricing Strategies for Market Penetration</h3>
+                            <p class="text-gray-600 text-sm mb-4">Explore different pricing models that can help you gain market share while maintaining profitability.</p>
+                            <div class="flex items-center justify-between">
+                                <div class="flex items-center">
+                                    <img src="https://randomuser.me/api/portraits/women/65.jpg" alt="Author" class="w-6 h-6 rounded-full mr-2">
+                                    <span class="text-xs text-gray-500">Emma Rodriguez</span>
+                                </div>
+                                <span class="text-xs text-gray-500">May 15, 2023</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Video Tutorials -->
+                <div>
+                    <div class="flex justify-between items-center mb-4">
+                        <h2 class="text-xl font-semibold">Video Tutorials</h2>
+                        <a href="#" class="text-blue-600 hover:text-blue-800 text-sm font-medium">View All</a>
+                    </div>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <!-- Video 1 -->
+                        <div class="resource-card bg-white rounded-xl shadow-sm overflow-hidden transition duration-300">
+                            <div class="video-container">
+                                <iframe src="https://www.youtube.com/embed/9No-FiEInLA" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                            </div>
+                            <div class="p-6">
+                                <div class="flex items-center text-sm text-gray-500 mb-2">
+                                    <span class="bg-red-100 text-red-800 text-xs px-2 py-1 rounded mr-2">Video</span>
+                                    <span>15 min</span>
+                                </div>
+                                <h3 class="font-semibold text-lg mb-2">How to Conduct a SWOT Analysis</h3>
+                                <p class="text-gray-600 text-sm mb-4">Step-by-step guide to identifying your business's strengths, weaknesses, opportunities, and threats.</p>
+                                <div class="flex items-center justify-between">
+                                    <div class="flex items-center">
+                                        <img src="https://randomuser.me/api/portraits/men/75.jpg" alt="Author" class="w-6 h-6 rounded-full mr-2">
+                                        <span class="text-xs text-gray-500">David Wilson</span>
+                                    </div>
+                                    <span class="text-xs text-gray-500">Apr 22, 2023</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Video 2 -->
+                        <div class="resource-card bg-white rounded-xl shadow-sm overflow-hidden transition duration-300">
+                            <div class="video-container">
+                                <iframe src="https://www.youtube.com/embed/5bIQB-IJp7Y" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                            </div>
+                            <div class="p-6">
+                                <div class="flex items-center text-sm text-gray-500 mb-2">
+                                    <span class="bg-red-100 text-red-800 text-xs px-2 py-1 rounded mr-2">Video</span>
+                                    <span>18 min</span>
+                                </div>
+                                <h3 class="font-semibold text-lg mb-2">Setting and Tracking Business KPIs</h3>
+                                <p class="text-gray-600 text-sm mb-4">Learn how to define meaningful key performance indicators and measure your progress effectively.</p>
+                                <div class="flex items-center justify-between">
+                                    <div class="flex items-center">
+                                        <img src="https://randomuser.me/api/portraits/women/33.jpg" alt="Author" class="w-6 h-6 rounded-full mr-2">
+                                        <span class="text-xs text-gray-500">Lisa Thompson</span>
+                                    </div>
+                                    <span class="text-xs text-gray-500">Apr 5, 2023</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </main>
+        </div>
+    </div>
+</body>
+</html>

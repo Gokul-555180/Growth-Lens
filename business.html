@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Business Setup</title>
+  <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap');
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: "Poppins", sans-serif;
+    }
+
+    body {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      background: linear-gradient(135deg, #c9d6ff, #e2e2e2);
+      padding: 20px;
+    }
+
+    .form-container {
+      background: #fff;
+      padding: 40px;
+      border-radius: 20px;
+      box-shadow: 0 0 30px rgba(0, 0, 0, 0.1);
+      width: 100%;
+      max-width: 600px;
+      animation: fadeIn 1s ease;
+    }
+
+    h2 {
+      text-align: center;
+      margin-bottom: 25px;
+      font-weight: 600;
+      font-size: 28px;
+      color: #333;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 8px;
+      font-weight: 500;
+    }
+
+    input, select, textarea {
+      width: 100%;
+      padding: 14px;
+      margin-bottom: 20px;
+      border: none;
+      border-radius: 10px;
+      background-color: #f1f1f1;
+      font-size: 15px;
+    }
+
+    textarea {
+      resize: vertical;
+      height: 100px;
+    }
+
+    button {
+      width: 100%;
+      padding: 14px;
+      border: none;
+      border-radius: 10px;
+      background-color: #6c63ff;
+      color: white;
+      font-size: 16px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background 0.3s ease;
+    }
+
+    button:hover {
+      background-color: #5a52d6;
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+  </style>
+</head>
+<body>
+
+<div class="form-container">
+  <h2>Tell Us About Your Business</h2>
+  <form id="businessForm">
+    <label for="businessType">Select Business Type</label>
+    <select id="businessType" required>
+      <option value="">-- Choose --</option>
+      <option value="E-commerce">E-commerce</option>
+      <option value="Consulting">Consulting</option>
+      <option value="SaaS">SaaS</option>
+      <option value="Retail">Retail</option>
+      <option value="Healthcare">Healthcare</option>
+      <option value="Education">Education</option>
+      <option value="Hospitality">Hospitality</option>
+      <option value="Finance">Finance</option>
+      <option value="Manufacturing">Manufacturing</option>
+      <option value="Entertainment">Entertainment</option>
+    </select>
+
+    <label for="businessName">Business Name</label>
+    <input type="text" id="businessName" placeholder="Enter your business name" required />
+
+    <label for="businessAim">Business Aim</label>
+    <textarea id="businessAim" placeholder="Describe the goal or vision of your business" required></textarea>
+
+    <button type="submit">Submit & Go to Dashboard</button>
+  </form>
+</div>
+
+<script>
+  document.getElementById("businessForm").addEventListener("submit", function(e) {
+    e.preventDefault();
+
+    const type = document.getElementById("businessType").value;
+    const name = document.getElementById("businessName").value;
+    const aim = document.getElementById("businessAim").value;
+
+    sessionStorage.setItem("businessType", type);
+    sessionStorage.setItem("businessName", name);
+    sessionStorage.setItem("businessAim", aim);
+
+    window.location.href = "dashboard.html";
+  });
+</script>
+
+</body>
+</html>

@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Business Registration</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet" />
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: 'Poppins', sans-serif;
+    }
+
+    body {
+      background: linear-gradient(135deg, #d0e7ff, #ffffff);
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .container {
+      background-color: white;
+      padding: 40px;
+      border-radius: 16px;
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+      width: 100%;
+      max-width: 500px;
+      animation: fadeIn 1s ease-in-out;
+    }
+
+    h2 {
+      color: #007acc;
+      text-align: center;
+      margin-bottom: 24px;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 8px;
+      font-weight: 600;
+      color: #333;
+    }
+
+    input, select, textarea {
+      width: 100%;
+      padding: 12px;
+      margin-bottom: 20px;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      font-size: 16px;
+    }
+
+    button {
+      width: 100%;
+      padding: 12px;
+      background-color: #007acc;
+      color: white;
+      font-weight: 600;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+
+    button:hover {
+      background-color: #005fa3;
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(-20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .link-container {
+      text-align: center;
+      margin-top: 20px;
+    }
+
+    .btn {
+      text-decoration: none;
+      background-color: #007acc;
+      padding: 10px 20px;
+      color: white;
+      border-radius: 8px;
+      font-weight: 600;
+      display: inline-block;
+      transition: background-color 0.3s ease;
+    }
+
+    .btn:hover {
+      background-color: #005fa3;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h2>Register Your Business</h2>
+    <form onsubmit="handleSubmit(event)">
+      <label for="businessType">Type of Business</label>
+      <select id="businessType" required>
+        <option value="">-- Select Business Type --</option>
+        <option>Retail</option>
+        <option>E-commerce</option>
+        <option>Tech Startup</option>
+        <option>Consulting</option>
+        <option>Food & Beverage</option>
+        <option>Real Estate</option>
+        <option>Healthcare</option>
+        <option>Education</option>
+        <option>Media & Entertainment</option>
+        <option>Manufacturing</option>
+      </select>
+
+      <label for="businessName">Business Name</label>
+      <input type="text" id="businessName" required />
+
+      <label for="businessAim">Business Aim</label>
+      <textarea id="businessAim" rows="4" required></textarea>
+
+      <button type="submit">Submit</button>
+    </form>
+    <!-- Optional Link to Dashboard -->
+    <div class="link-container">
+      <a href="dashboard.html" class="btn">Go to Dashboard</a>
+    </div>
+  </div>
+
+  <script>
+    function handleSubmit(event) {
+      event.preventDefault();
+      window.location.href = "dashboard.html";
+    }
+  </script>
+</body>
+</html>
+
